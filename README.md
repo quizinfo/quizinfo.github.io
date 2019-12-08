@@ -1,1 +1,0 @@
-# quizinfo.github.io
