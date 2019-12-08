@@ -1,0 +1,293 @@
+:root{
+--shadow:0 3px 6px rgba(0,0,0,0.16);
+--main:#3A4C55;
+}
+*, :before, :after{
+margin:0;
+font-size:16px;
+font-family:sans-serif;
+box-sizing:border-box;
+position:relative;
+transition-duration:.4s;
+transition-timing-function:linear;
+letter-spacing:.6px;
+line-height:20px;
+}
+header{
+box-shadow:var(--shadow);
+background:var(--main);
+color:white;
+padding:40px 10px 40px 10px;
+}
+.name{
+font-size:60px;
+vertical-align:middle;
+}
+.screen{
+position:fixed;
+top:101.35px;
+left:-100%;
+opacity:0;
+width:100%;
+height:100%;
+}
+.screen-active{
+left:0px;
+opacity:1;
+}
+.screen-name{
+display:flex;
+flex-direction:column;
+}
+.name-info{
+padding:10px;
+font-size:20px;
+}
+input[type="text"]{
+padding:10px;
+border:2px solid var(--main);
+}
+input[type="text"]:hover{
+box-shadow:var(--shadow);
+}
+input[type="text"]:focus{
+box-shadow:inset var(--shadow);
+}
+input[type="submit"]{
+background:var(--main);
+border:none;
+padding:10px;
+color:white;
+box-shadow:var(--shadow);
+cursor:pointer;
+}
+input[type="submit"]:hover{
+background:black;
+}
+form{
+display:flex;
+flex-direction:column;
+}
+form>span{
+padding:0px 10px 10px 10px;
+}
+.overflow{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:white;
+opacity:.7;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+.loader{
+width:20px;
+height:20px;
+display:table;
+border:2px solid;
+border-top-color:white;
+border-radius:100%;
+animation:1s linear infinite loading;
+}
+@keyframes loading{
+0%{
+padding:0px;
+transform:rotate(0deg);
+}
+50%{
+padding:10px;
+transform:rotate(360deg); 
+}
+100%{
+padding:0px;
+transform:rotate(360deg);
+}
+}
+.screen-waiting{
+display:flex;
+align-items:center;
+flex-direction:column;
+
+}
+.waiting-anim{
+width:1px;
+height:40px;
+border-radius:0;
+border:2px solid black;
+top:10px;
+animation:20s cubic-bezier(1,0,0,1) infinite waiting;
+letter-spacing:2px;
+}
+@keyframes waiting{
+0%{
+border-radius:0;
+transform:rotate(3600deg);
+}
+50%{
+border-radius:100%;
+transform:rotate(0deg);
+}
+60%{
+border-radius:0;
+transform:rotate(3600deg);
+}
+}
+.waiting-text{
+font-size:30px;
+display: inline-table;
+letter-spacing: 2px;
+margin: 10px;
+line-height: 1;
+}
+.screen-toolate{
+display:flex;
+justify-content:center;
+align-items:center;
+color:orangered;
+}
+.late-text{
+font-size:40px;
+line-height:1;
+left:10px;
+}
+.ovflow-hid{
+display:none;
+}
+.alert-con{
+display:flex;
+justify-content:center;
+top:100px;
+left:-100%;
+}
+.alert-text{
+font-size:20px;
+margin:15px;
+left:-100%;
+}
+.alerting{
+left:0%;
+}
+.alerting>.alert-text{
+left:0;
+}
+.s-loader>span{
+display:inline-table;
+width:3px;
+height:3px;
+background:black;
+margin:5px;
+top:-4px;
+left:-5px;
+}
+.s-loader{
+display:table;
+}
+.s-loader>span:nth-child(1){
+animation:1s linear infinite sl1;
+}
+.s-loader>span:nth-child(2){
+animation:1s linear infinite sl1;
+animation-delay:.1s;
+}
+.s-loader>span:nth-child(3){
+animation:1s linear infinite sl1;
+animation-delay:.2s;
+}
+@keyframes sl1{
+from{
+opacity:1;
+left:0px;
+transform:scale(2);
+}
+to{
+opacity:0;
+left:50px;
+transform:scale(0);
+}
+}
+.s-hidden{
+transition-timing-function:cubic-bezier(.95,.05,.8,.04);
+opacity:0;
+display:none;
+}
+.question{
+font-size:30px;
+display:table;
+line-height:1;
+margin:10px;
+}
+.answer{
+display:table;
+padding:10px;
+border-top:1px solid #eee;
+width:100%;
+}
+.cbox{
+width:20px;
+height:20px;
+border:2px solid black;
+left:-5px;
+top:-2px;
+box-shadow:var(--shadow);
+}
+.answer-text{
+width:calc(100% - 38px);
+}
+.answer>span{
+display:inline-table;
+vertical-align:middle;
+}
+.ans-correct{
+background:yellowgreen;
+color:white;
+box-shadow:var(--shadow);
+}
+.ans-wrong{
+background:orangered;
+color:white;
+box-shadow:var(--shadow);
+}
+.ans-correct>.cbox:after, .ans-wrong>.cbox:after{
+content:"";
+width:12px;
+height:12px;
+background:black;
+display:block;
+margin-left:2px;
+margin-right:2px;
+top:2px;
+}
+.screen-end{
+display:flex;
+justify-content:center;
+top:-10%;
+flex-direction:column;
+align-items:center;
+}
+.youd{
+width:100%;
+font-size:20px;
+padding:10px;
+line-height:1;
+display:flex;
+justify-content: center;
+}
+@media only screen and (max-width:420px){
+.youd{
+display:table;
+}
+}
+.youd>span{
+display:inline-table;
+font-size:30px;
+padding: 5px;
+top: -5px;
+}
+.cline{
+height:3px;
+background:var(--main);
+top:5px;
+}

@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<title>Quiz Parazitii</title>
+<link rel="stylesheet" type="text/css" href="player.css"/>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+<body>
+<header><span class="name">Quiz</span></header>
+<div class="screen screen-active screen-name">
+<div class="name-info">Alege un nume/porecla</div>
+<form method="POST"><span><input type="text" name="name" placeholder="Numele tau"/></span><span><input type="submit" value="Incepe"/><span class="s-loader s-hidden"><span></span><span></span><span></span></span></span></form></div>
+<div class="screen screen-waiting"><span class="waiting-text">Asteapta ca ceilalti colegi sa se inscrie</span><span class="waiting-anim"></span></div>
+<div class="screen screen-toolate"><span class="late-text">Din pacate, quiz-ul a inceput deja</span></div>
+<div class="screen screen-game"><div class="s-loader"><span></span><span></span><span></span></div><div class="game"></div></div>
+<div class="screen screen-end"><span class="youd">Ai obtinut <span></span> raspunsuri corecte! Felicitari!</span><span class="cline"></span></div>
+<div class="overflow"><span class="loader"></span></div>
+<div class="overflow ovflow-hid"></div>
+<div class="alert-con"><span class="alert-text"></span></div>
+<script src="https://cdn.ably.io/lib/ably.min-1.js"></script>
+<script src="player.js"></script>
+</body>
+</html>
