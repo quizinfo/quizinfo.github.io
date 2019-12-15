@@ -43,7 +43,7 @@ cr+=('00'+value.toString(16)).substr(-2);
 return cr;
 }
 
-var key="pK5Nhw.HF8k0g:SlGXwkhBDC6KrsHV";
+var key="bBPgpQ.VU20Uw:JEHRl0uaL8fYak9z";
 var ably=new Ably.Realtime(key);
 ably.connection.on('connected', function(){
 quiz.start();
@@ -78,6 +78,8 @@ quiz.reg(value);
 var err=ably.channels.get('errors');
 var rounds=ably.channels.get('round');
 var done=ably.channels.get("done");
+var rems=ably.channels.get("rems");
+rems.subscribe("data", quiz.rem);
 done.subscribe("data", quiz.end);
 err.subscribe("data", (data)=>{
 quiz.error(data.data);
@@ -98,6 +100,15 @@ data=JSON.parse(data.data);
 quiz.accept(data.uuid, data.name);
 if(timer) clearTimeout(timer);
 })
+}
+
+quiz.rem=data=>{
+data=JSON.parse(data.data);
+if(data.uuid==uuid){
+alert("Ai fost eliminat definitiv din competitie");
+localStorage.setItem("claws", 1);
+wait(2000, ()=>location.reload());
+}
 }
 
 quiz.reg=name=>{
@@ -163,10 +174,10 @@ con.appendChild(ans);
 gl.classList.add("s-hidden");
 game.innerHTML="";
 game.appendChild(con);
-quiz.events(data.correct);
+quiz.events(data.correct, data);
 }
 
-quiz.events=(correct)=>{
+quiz.events=(correct, data)=>{
 var ans=_q(".answer"), ansd=0;
 ans.forEach((e, i)=>{
 l(e, "click", ()=>{
@@ -175,10 +186,10 @@ ansd=1;
 if(i==correct){
 cor++;
 e.classList.add("ans-correct");
-quiz.ans({uuid:uuid, c:1});
+quiz.ans({uuid:uuid, c:1, va:i, data:null});
 } else {
 e.classList.add("ans-wrong");
-quiz.ans({uuid:uuid, c:0});
+quiz.ans({uuid:uuid, c:0, va:i, data:data});
 }
 })
 })
@@ -186,8 +197,18 @@ quiz.ans({uuid:uuid, c:0});
 
 var answers=ably.channels.get("answers");
 quiz.ans=data=>{
+_q(".crect").forEach(e=>e.remove());
 q(".overflow").classList.remove("ovflow-hid");
 answers.publish("data", JSON.stringify(data));
+if(!data.data) return;
+var crect=document.createElement("div");
+crect.classList.add("crect");
+crect.innerHTML="<span class='crect-label'>Raspuns corect</span><span class='crect-que'>"+data.data.question+"</span>"+
+"<span class='crect-ans'>"+data.data.answers[data.data.correct]+"</span>";
+q(".overflow").insertBefore(crect, q(".overflow").firstChild);
+wait(200, ()=>{
+crect.classList.add("crect-anim");
+})
 }
 
 var dd=0;
