@@ -43,7 +43,7 @@ cr+=('00'+value.toString(16)).substr(-2);
 return cr;
 }
 
-var key="bBPgpQ.VU20Uw:JEHRl0uaL8fYak9z";
+var key="MEhrhA.D6LSGQ:2jnpLuls9g9A7AlQ";
 var ably=new Ably.Realtime(key);
 ably.connection.on('connected', function(){
 quiz.start();
